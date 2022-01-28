@@ -33,8 +33,7 @@ int main(int argc, char* argv[]){
 		printState(statObj);
 		putchar('\t');
 //		printf("%s %s\n", genDate(statObj->st_mtim), argv[i]); /* for freeBSD */
-		printf("%s %s\n", genDate(statObj->st_mtimespec), argv[i]); /* for macOS */
-		
+		printf("%s %s\n", genDate(statObj->st_mtimespec), argv[i]); /* for macOS */	
 	}
 
 	return 0;

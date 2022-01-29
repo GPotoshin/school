@@ -4,4 +4,4 @@ dif: main.c
 	cc $(CFLAGS) main.c -o dif
 
 compare: compare.c
-	cc $(CFLAGS) compare.c -o compare
+	cc $(CFLAGS) -lm compare.c -o compare

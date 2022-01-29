@@ -1,5 +1,6 @@
 .PHONY: clear all
 
+all: printState.o genDate.o main.o myls
 
 printState.o: func/printState.c func/printState.h
 	cc -Wall -c -o bin/printState.o func/printState.c
@@ -12,9 +13,6 @@ main.o: main.c myls.h
 
 myls: bin/main.o bin/genDate.o bin/printState.o
 	cc -o myls bin/*.o
-
-all:
-	make printState.o genDate.o main.o myls
 
 clear:
 	rm bin/main.o bin/genDate.o bin/printState.o

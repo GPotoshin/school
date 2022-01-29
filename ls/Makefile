@@ -14,5 +14,5 @@ main.o: main.c myls.h
 myls: bin/main.o bin/genDate.o bin/printState.o
 	cc -o myls bin/*.o
 
-clear:
-	rm bin/main.o bin/genDate.o bin/printState.o
+clean:
+	rm bin/main.o bin/genDate.o bin/printState.o myls

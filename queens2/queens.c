@@ -52,7 +52,7 @@ void printBoard(int board[100][101]){
 
 void drawBoard(int board[100][101]){
 	
-	char *filename = malloc(sizeof(char)*(logd(num)+1100));
+	char *filename = malloc(sizeof(char)*(logd(num)+10));
 	num++;
 	if (!filename) {
 		goto _bailout;

@@ -38,6 +38,7 @@ phase primeOfPhase (phase p) {
 	return out;
 }
 
+// https://en.wikipedia.org/wiki/Linear_multistep_method
 phase nextPhase (phase *pp, int acc) {
 	phase p;
 	double *dp = (double *)&p;

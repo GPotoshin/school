@@ -6,4 +6,5 @@ most reсent: queens2 gravity ls
 
 
 school: http://www.kurchatov1189.ru/about_us/
+
 tasks:	http://codelabs.ru/1189/2020-2022/

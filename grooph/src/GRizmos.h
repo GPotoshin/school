@@ -1,28 +1,26 @@
 /*
  * =====================================================================================
  *
- *       Filename:  grooph.h
+ *       Filename:  GRizmos.h
  *
- *    Description:  
+ *    Description:  functions that are not straightly related to grooph idea
+ *					but I realy want (need) to implement them
  *
  *        Version:  1.0
- *        Created:  02/18/2022 20:42:04
+ *        Created:  02/19/2022 23:27:02
  *       Revision:  none
  *       Compiler:  clang
  *
  *         Author:  George Potoshin (GP), george.potoshin@gmail.com
- *   Organization:  
+ *   Organization:
  *
  * =====================================================================================
  */
-#ifndef GROOPH_H
-#define GROOPH_H
 
-#include <png.h>
+#ifndef GRIZMOS_H
+#define GRIZMOS_H
 
-#include "GRDefs.h"
-#include "GRTypes.h"
-#include "GREssence.h"
-#include "GRDraw.h"
+char *cstr (const char *str);
+int sgn (int x);
 
-#endif /* GROOPH_H */
+#endif /* GRIZMOS_H */

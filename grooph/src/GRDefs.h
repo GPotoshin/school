@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  grooph.h
+ *       Filename:  GRDefs.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  02/18/2022 20:42:04
+ *        Created:  03/06/2022 19:46:33
  *       Revision:  none
  *       Compiler:  clang
  *
@@ -15,14 +15,10 @@
  *
  * =====================================================================================
  */
-#ifndef GROOPH_H
-#define GROOPH_H
+#ifndef GRDEFS_H
+#define GRDEFS_H
 
-#include <png.h>
+#define GR_PNG 0x000001
+#define GR_PNG 0x000002
 
-#include "GRDefs.h"
-#include "GRTypes.h"
-#include "GREssence.h"
-#include "GRDraw.h"
-
-#endif /* GROOPH_H */
+#endif /* GRDEFS_H */

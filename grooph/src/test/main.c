@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  grooph.h
+ *       Filename:  main.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  02/18/2022 20:42:04
+ *        Created:  03/04/2022 12:38:50
  *       Revision:  none
  *       Compiler:  clang
  *
@@ -15,14 +15,10 @@
  *
  * =====================================================================================
  */
-#ifndef GROOPH_H
-#define GROOPH_H
+#include <stdlib.h>
+#include <stdio.h>
 
-#include <png.h>
-
-#include "GRDefs.h"
-#include "GRTypes.h"
-#include "GREssence.h"
-#include "GRDraw.h"
-
-#endif /* GROOPH_H */
+int main () {
+	printf ("%lu, %lu\n", sizeof(void *), sizeof(char *));
+	return 0;
+}

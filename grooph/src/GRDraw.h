@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  grooph.h
+ *       Filename:  GRDraw.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  02/18/2022 20:42:04
+ *        Created:  03/06/2022 20:37:14
  *       Revision:  none
  *       Compiler:  clang
  *
@@ -15,14 +15,13 @@
  *
  * =====================================================================================
  */
-#ifndef GROOPH_H
-#define GROOPH_H
+#ifndef GRDRAW_H
+#define GRDRAW_H
 
-#include <png.h>
-
-#include "GRDefs.h"
 #include "GRTypes.h"
-#include "GREssence.h"
-#include "GRDraw.h"
 
-#endif /* GROOPH_H */
+int GRFullBackground (GRImg *img, void *color); 
+int GRPutDot (GRImg *img, int x, int y, void *color, int r);
+int GRDrawLine (GRImg *img, GRInt2 p1, GRInt2 p2, ...);
+
+#endif /* GRDRAW_H */

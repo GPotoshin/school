@@ -20,26 +20,26 @@
 #include <strings.h>
 #include <math.h>
 
+#include "GRDefs.h"
 #include "GRTypes.h"
 #include "GRDraw.h"
 #include "GRizmos.h"
 
-int GRFullBackground (GRImg *img, void *color) {
+int GRFullBackground (GRImg *img, GRColor color) {
 	int retval = -1;
 	if (!img->rows)
 		goto _bailout;
 
 	retval = -2;
 	if (img->filetype == GR_PNG) {
-		png_colorp cp = color;
 		for (int j = 0; j < img->height; j++) {
 			if (!img->rows[j])
 				goto _bailout;
 			for (int i = 0; i < img->width; i++) {
 				GRBytep bp = img->rows[j] + i*3;
-				bp[0] = cp->red;
-				bp[1] = cp->green;
-				bp[2] = cp->blue;
+				bp[0] = color.red;
+				bp[1] = color.green;
+				bp[2] = color.blue;
 			}
 		}
 	}
@@ -50,34 +50,33 @@ _bailout:
 }
 
 
-int GRPutDot (GRImg *img, GRInt2 p, void *color, int r) {
+int GRPutRainbowyDot (GRImg *img, GRInt2 p, GRColor color, int w) {
 	int retval = -1;
 	if (!img->rows)
 		goto _bailout;
 
 	retval = -2;
 	if (img->filetype == GR_PNG) {
-		png_colorp cp = color;
-		for (int j = y - r; j <= y + r; j++) {
+		for (int j = p.y - w; j <= p.y + w; j++) {
 			if (!img->rows[j])
 				goto _bailout;
 
-			for (int i = x - r; i <= x + r; i++) {
-				if (j < img->height && i < img->width && ((i-x)*(i-x) + (j-y)*(j-y)\
-							< r*r)) {
+			for (int i = p.x - w; i <= p.x + w; i++) {
+				if (j < img->height && i < img->width && 
+						((i-p.x)*(i-p.x) + (j-p.y)*(j-p.y) < w*w)) {
 					GRBytep bp = img->rows[j] + i*3;
-					bp[0] = (GRByte) fmax ((GRByte)(cp->red * 1.5 * r /
-							(1.5*r + hypot (i-x, j-y))),
-							(GRByte)(bp[0] + cp->red * 1.5 * r /
-							(1.5*r + hypot (i-x, j-y))));
-					bp[1] = (GRByte) fmax ((GRByte)(cp->green * 1.5 * r /
-							(1.5*r + hypot (i-x, j-y))),
-							(GRByte)(bp[1] + cp->green * 1.5 * r /
-							(1.5*r + hypot (i-x, j-y))));
-					bp[2] = (GRByte) fmax ((GRByte)(cp->blue * 1.5*r /
-							(1.5*r + hypot (i-x, j-y))),
-							(GRByte)(bp[2] + cp->blue * 1.5*r /
-							(1.5*r + hypot (i-x, j-y))));
+					bp[0] = (GRByte) fmax ((GRByte)(color.red * 1.5 * w /
+							(1.5*w + hypot (i-p.x, j-p.y))),
+							(GRByte)(bp[0] + color.red * 1.5 * w /
+							(1.5*w + hypot (i-p.x, j-p.y))));
+					bp[1] = (GRByte) fmax ((GRByte)(color.green * 1.5 * w /
+							(1.5*w + hypot (i-p.x, j-p.y))),
+							(GRByte)(bp[1] + color.green * 1.5 * w /
+							(1.5*w + hypot (i-p.x, j-p.y))));
+					bp[2] = (GRByte) fmax ((GRByte)(color.blue * 1.5 * w /
+							(1.5*w + hypot (i-p.x, j-p.y))),
+							(GRByte)(bp[2] + color.blue * 1.5 * w /
+							(1.5*w + hypot (i-p.x, j-p.y))));
 				}
 			}
 		}
@@ -89,47 +88,88 @@ _bailout:
 }
 
 
-int GRDrawLine (GRImg *img, GRInt2 p1, GRInt2 p2, void *color, int w) {
+int GRDrawLine (GRImg *img, GRInt2 p1, GRInt2 p2, GRColor color, int w) {
 	int retval = -1;
-
-	if (x1 == x2) {
-		for (int i = fmin (y2, y1); i <= fmax (y2, y1); i++) {
-			GRPutDot (img, x1, i, color, w);
+	GRInt2 p;
+	if (p1.x == p2.x) {
+		p.x = p1.x;
+		for (p.y = fmin (p2.y, p1.y); p.y <= fmax (p2.y, p1.y); p.y += (w+1)/2) {
+			GRPutRainbowyDot (img, p, color, w);
 		}
 	}
-	if (y1 == y2) {
-		for (int i = fmin (x2, x1); i <= fmax (x2, x1); i++) {
-			GRPutDot (img, i, y1, color, w);
+	if (p1.y == p2.y) {
+		p.y = p1.y;
+		for (p.x = fmin (p2.x, p1.x); p.x <= fmax (p2.x, p1.x); p.x += (w+1)/2) {
+			GRPutRainbowyDot (img, p, color, w);
 		}
 	}
 
-	if (y2 < y1) {
-		int p = y1;
-		y1 = y2;
-		y2 = p
-		p = x1;
-		x1 = x2;
-		x2 = p;
+	if (p2.x < p1.x) {
+		p1.y += p2.y;
+		p2.y = p1.y - p2.y;
+		p1.y -= p2.y;
+		p1.x += p2.x;
+		p2.x = p1.x - p2.x;
+		p1.x -= p2.x;
 	}
 
-	double k, m;
+	p = p1;
+	double k = (double)(p2.y - p1.y) / (p2.x - p1.x);
+	double m = 0.5*(p1.y - k*p1.x + p2.y - k*p2.x);
 
-	int d;
-	int x = x1, y = y1;
 	if (k*k < 1) {
-		k = (y2 - y1) / (x2 - x1);
-		m = 0.5 * (y1 - k*x1 + y2 - k*x2);
-		int d = sgn(k);
-
-		while (y <= y2) {
-			GRPutDot ();
-			if ()
+		if (k > 0) {
+			while (p.x <= p2.x) {
+				GRPutRainbowyDot (img, p, color, w);
+				p.x++;
+				if (p.y < k*p.x + m) {
+					p.y++;
+				}
+			}
+		}
+		else {
+			while (p.x <= p2.x) {
+				GRPutRainbowyDot (img, p, color, w);
+				p.x++;
+				if (p.y > k*p.x + m) {
+					p.y--;
+				}
+			}
 		}
 	}
 	else {
-
+		if (k > 0) {
+			while (p.y <= p2.y) {
+				GRPutRainbowyDot (img, p, color, w);
+				p.y++;
+				if (p.x < (p.y - m) / k) {
+					p.x++;
+				}
+			}
+		}
+		else {
+			while (p.y >= p2.y) {
+				GRPutRainbowyDot (img, p, color, w);
+				p.y--;
+				if (p.x < (p.y - m) / k) {
+					p.x++;
+				}
+			}
+		}
 	}
 
+	retval = 0;
 _bailout:
 	return retval;
+}
+
+int GRDrawCircle (GRImg *img, GRInt2 p, int r, GRColor color, int w) {
+	GRInt2 v;
+	double dt = 1.0 / r;
+	for (double t = 0; t < 2 * M_PI; t += dt) {
+		v.x = p.x + r*cos(t);
+		v.y = p.y + r*sin(t);
+		GRPutRainbowyDot (img, v, color, w);
+	}
+	return 0;
 }

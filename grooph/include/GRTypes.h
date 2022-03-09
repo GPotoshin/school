@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *        Filename:  GRImg.h
+ *        Filename:  GRTypes.h
  *
  *    Description:  
  *
@@ -15,11 +15,11 @@
  *
  * =====================================================================================
  */
-#ifndef GRIMG_H
-#define GRIMG_H
+#ifndef GRTYPES_H
+#define GRTYPES_H
 
-typedef unsigned char byte;
-typedef unsigned char * bytep;
+typedef unsigned char GRByte;
+typedef unsigned char * GRBytep;
 
 typedef struct {
 	int filetype;
@@ -34,11 +34,21 @@ typedef struct {
 	int height;
 	int width;
 
-	bytep *rows;
+	GRBytep *rows;
 
 	void **data;
 	int partition;
 } GRImg;
 
+typedef struct {
+	int x;
+	int y;
+} GRInt2;
 
-#endif /* GRIMG_H */
+typedef struct {
+	GRByte red;
+	GRByte green;
+	GRByte blue;
+} GRColor;
+
+#endif /* GRTYPES_H */

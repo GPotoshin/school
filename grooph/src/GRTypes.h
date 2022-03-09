@@ -45,4 +45,10 @@ typedef struct {
 	int y;
 } GRInt2;
 
+typedef struct {
+	GRByte red;
+	GRByte green;
+	GRByte blue;
+} GRColor;
+
 #endif /* GRTYPES_H */

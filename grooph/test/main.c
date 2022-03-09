@@ -31,31 +31,32 @@ int main () {
 		return 0;
 	}
 
-	if (GRSetSize (img, 3000, 2400)) {
+	if (GRSetSize (img, 1440, 900)) {
 		printf ("GRSetSize: Can't allocate memory!\n");
 		return 0;
 	}
 
-	png_color color;
+	GRColor color = {13, 13, 13};
+	GRFullBackground (img, color);
 
-	color.red = 5;
-	color.green = 5;
-	color.blue = 5;
+	GRInt2 p1 = {720, 50};
+	GRInt2 p2 = {1182, 850};
+	color.red = 16;
+	color.green = 12;
+	color.blue = 24;
+	
+	GRDrawLine (img, p1, p2, color, 3);
+	p2.x = 720;
+	GRDrawLine (img, p1, p2, color, 3);
+	p2.x = 266;
+	GRDrawLine (img, p1, p2, color, 3);
+	p1.x = 1182;
+	p1.y = 850;
+	GRDrawLine (img, p1, p2, color, 3);
 
-	if (GRFullBackground (img, &color)) {
-		printf ("GRFullBackground: missing pointer!\n");
-		return 0;
-	}
-
-	color.red = 50;
-	color.green = 75;
-	color.blue = 25;
-
-	if (GRPutDot (img, 1500, 1200, &color, 1000)) {
-		printf ("GRPutDot: missing pointer!\n");
-		return 0;
-	}
-
+	p1.x = 720;
+	p1.y = 583;
+	GRDrawCircle (img, p1, 266, color, 3);
 	GRWriteImg (img, fp);
 	fclose (fp);
 	return 0;

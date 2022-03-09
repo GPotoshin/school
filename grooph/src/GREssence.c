@@ -3,15 +3,15 @@
  *
  *       Filename:  GREssence.c
  *
- *    Description:  
+ *    Description:
  *
  *        Version:  1.0
  *        Created:  02/14/2022 13:52:16
  *       Revision:  none
- *       Compiler:  
+ *       Compiler:
  *
  *         Author:  George Potoshin (GP), george.potoshin@gmail.com
- *   Organization:  
+ *   Organization:
  *
  * =====================================================================================
  */
@@ -20,11 +20,14 @@
 #include <strings.h>
 #include <math.h>
 
+#include <png.h>
+
+#include "GRDefs.h"
 #include "GRTypes.h"
 #include "GREssence.h"
 #include "GRizmos.h"
 
-GRImg *GRInitImg (int filetype, int colortype, 
+GRImg *GRInitImg (int filetype, int colortype,
 			   int interlace, int compression, int filter, char *libver) {
 	void *retval = 0;
 
@@ -98,7 +101,7 @@ void GRDestroyImg (GRImg *img) {
 void GRWriteImg (GRImg *img, FILE *filep) {
 	if (img->filetype == GR_PNG) {
 		png_init_io (img->data[0], filep);
-		png_set_IHDR (img->data[0], img->data[1], img->width, img->height, 8, 
+		png_set_IHDR (img->data[0], img->data[1], img->width, img->height, 8,
 			img->colortype, img->interlace, img->compression, img->filter);
 		png_write_info (img->data[0], img->data[1]);
 		png_write_image (img->data[0], img->rows);
@@ -109,7 +112,7 @@ void GRWriteImg (GRImg *img, FILE *filep) {
 GRImg *GRInitDefaultImg (int filetype) {
 	if (filetype == GR_PNG)
 		return GRInitImg (GR_PNG, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,
-						  PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE, 
+						  PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE,
 						  PNG_LIBPNG_VER_STRING);
 	return NULL;
 }
@@ -123,7 +126,7 @@ int GRSetSize (GRImg *img, int width, int height)  {
 	img->rows = malloc (row_bytes);
 	if (!img->rows)
 		goto _bailout;
-	
+
 	bzero (img->rows, row_bytes);
 	for (int i = 0; i < height; i++) {
 		img->rows[i] = malloc (col_bytes);
@@ -184,7 +187,7 @@ int GRResetSize (GRImg *img, int width, int height) {
 		row_bytes = img->height * sizeof (GRBytep);
 		goto _bailout;
 	}
-	
+
 	bzero (img->rows, row_bytes);
 	for (int i = 0; i < height; i++) {
 		p = img->rows[i];
@@ -194,7 +197,7 @@ int GRResetSize (GRImg *img, int width, int height) {
 			goto _bailout;
 		}
 	}
-	
+
 	img->height = height;
 	img->width = width;
 

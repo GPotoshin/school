@@ -41,14 +41,14 @@ int main () {
 
 	GRInt2 p1 = {720, 50};
 	GRInt2 p2 = {1182, 850};
-	color.red = 16;
-	color.green = 12;
+	color.red = 60;
+	color.green = 56;
 	color.blue = 24;
 	
 	GRDrawLine (img, p1, p2, color, 3);
 	p2.x = 720;
 	GRDrawLine (img, p1, p2, color, 3);
-	p2.x = 266;
+	p2.x = 258;
 	GRDrawLine (img, p1, p2, color, 3);
 	p1.x = 1182;
 	p1.y = 850;

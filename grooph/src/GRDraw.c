@@ -93,13 +93,19 @@ int GRDrawLine (GRImg *img, GRInt2 p1, GRInt2 p2, GRColor color, int w) {
 	GRInt2 p;
 	if (p1.x == p2.x) {
 		p.x = p1.x;
-		for (p.y = fmin (p2.y, p1.y); p.y <= fmax (p2.y, p1.y); p.y += (w+1)/2) {
+		color.red /= 2;
+		color.green /= 2;
+		color.blue /= 2;
+		for (p.y = fmin (p2.y, p1.y); p.y <= fmax (p2.y, p1.y); p.y++) {
 			GRPutRainbowyDot (img, p, color, w);
 		}
 	}
 	if (p1.y == p2.y) {
 		p.y = p1.y;
-		for (p.x = fmin (p2.x, p1.x); p.x <= fmax (p2.x, p1.x); p.x += (w+1)/2) {
+		color.red /= 2;
+		color.green /= 2;
+		color.blue /= 2;
+		for (p.x = fmin (p2.x, p1.x); p.x <= fmax (p2.x, p1.x); p.x++) {
 			GRPutRainbowyDot (img, p, color, w);
 		}
 	}
@@ -116,6 +122,13 @@ int GRDrawLine (GRImg *img, GRInt2 p1, GRInt2 p2, GRColor color, int w) {
 	p = p1;
 	double k = (double)(p2.y - p1.y) / (p2.x - p1.x);
 	double m = 0.5*(p1.y - k*p1.x + p2.y - k*p2.x);
+	
+	double g = 0.7 / ((1.15*k + 1)*(1.15*k + 1) + 1) + 
+		0.7 / ((1.15*k - 1)*(1.15*k - 1) + 1) -
+		0.7 / (1.15*1.15*k*k + 1) + 0.5;
+	color.red *= g;
+	color.green *= g;
+	color.blue *= g;
 
 	if (k*k < 1) {
 		if (k > 0) {
@@ -165,7 +178,7 @@ _bailout:
 
 int GRDrawCircle (GRImg *img, GRInt2 p, int r, GRColor color, int w) {
 	GRInt2 v;
-	double dt = 1.0 / r;
+	double dt = 1.4 / r;
 	for (double t = 0; t < 2 * M_PI; t += dt) {
 		v.x = p.x + r*cos(t);
 		v.y = p.y + r*sin(t);

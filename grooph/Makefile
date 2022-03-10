@@ -1,4 +1,4 @@
-.PHONY: clear all
+.PHONY: clean all
 
 CCFLAGS += -pipe -O2 -g
 LDFLAGS += -lm -lpng
@@ -26,5 +26,5 @@ include: $(INCLUDE_HEADERS)
 	cp src/GRTypes.h include
 	cp src/GREssence.h include
 
-clear:
+clean:
 	rm -f bin/GREssence.o bin/GRizomos.o bin/GRDraw.o bin/grooph.so

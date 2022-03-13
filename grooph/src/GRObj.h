@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  test.c
+ *       Filename:  GRObj.h
  *
- *    Description:  
+ *    Description: support for .obj files 
  *
  *        Version:  1.0
- *        Created:  02/14/2022 14:04:30
+ *        Created:  03/13/2022 11:26:26
  *       Revision:  none
  *       Compiler:  clang
  *
@@ -15,18 +15,11 @@
  *
  * =====================================================================================
  */
-#include <stdlib.h>
-#include <stdio.h>
+#ifndef GROBJ_H
+#define GROBJ_H
 
-typedef struct {
-	int age;
-	char *sort;
-} salamon;
+#include "GR3DdTypes.h"
 
 
-int main () {
-	salamon s;
-	s.age = -0x10;
-	printf("%d\n", s.age);
-	return 0;
-}
+
+#endif /* GROBJ_H */

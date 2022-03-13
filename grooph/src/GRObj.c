@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  main.c
+ *       Filename:  GRObj.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  03/04/2022 12:38:50
+ *        Created:  03/13/2022 11:26:04
  *       Revision:  none
  *       Compiler:  clang
  *
@@ -16,9 +16,11 @@
  * =====================================================================================
  */
 #include <stdlib.h>
-#include <stdio.h>
 
-int main () {
-	printf ("%lu, %lu\n", sizeof(void *), sizeof(char *));
-	return 0;
+#include "GR3dTypes.h"
+
+GRFigure *GRObjLoadFigure (FILE *filep) {
+	while (!feof (filep)) {
+
+	}
 }

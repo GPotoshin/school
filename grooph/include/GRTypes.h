@@ -46,6 +46,11 @@ typedef struct {
 } GRInt2;
 
 typedef struct {
+	int x;
+	int y;
+} GRDouble2;
+
+typedef struct {
 	GRByte red;
 	GRByte green;
 	GRByte blue;

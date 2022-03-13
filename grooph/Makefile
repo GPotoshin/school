@@ -1,9 +1,8 @@
-.PHONY: clean all
+.PHONY: clean all include
 
-CCFLAGS += -pipe -O2 -g
+CCFLAGS += -pipe -O2 -g -fPIC
 LDFLAGS += -lm -lpng
 
-INCLUDE_HEADERS := src/grooph.h src/GRDraw.h src/GRDefs.h src/GRTypes.h src/GREssence.h
 
 all: bin/grooph.so
 
@@ -16,15 +15,19 @@ bin/GREssence.o: src/GREssence.c src/GREssence.h src/GRTypes.h src/GRDefs.h
 bin/GRDraw.o: src/GRDraw.c src/GRDraw.h src/GRTypes.h src/GRDefs.h
 	cc $(CCFLAGS) -c src/GRDraw.c -o bin/GRDraw.o
 
+bin/GR3d.o: src/GR3d.c src/GR3d.h src/GRTypes.h src/GRDefs.h
+	cc $(CCFLAGS) -c src/GR3d.c -o bin/GR3d.o
+
 bin/grooph.so: bin/GREssence.o bin/GRDraw.o bin/GRizmos.o
 	cc $(LDFLAGS) -shared bin/GREssence.o bin/GRDraw.o bin/GRizmos.o -o bin/grooph.so
 
-include: $(INCLUDE_HEADERS)
+include:
 	cp src/grooph.h include
 	cp src/GRDraw.h include
 	cp src/GRDefs.h include
 	cp src/GRTypes.h include
 	cp src/GREssence.h include
+	cp src/GR3d.h include
 
 clean:
-	rm -f bin/GREssence.o bin/GRizomos.o bin/GRDraw.o bin/grooph.so
+	rm -f bin/GREssence.o bin/GRizmos.o bin/GRDraw.o bin/grooph.so

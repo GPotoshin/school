@@ -2,7 +2,7 @@
 
 Almost all my homework at school №1189
 
-most reсent: queens2 gravity grooph
+most reсent: gravity star fractalisation
 
 
 school: http://www.kurchatov1189.ru/about_us/

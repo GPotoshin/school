@@ -47,32 +47,32 @@ int main () {
 
 
 	int size = 4;
-	GRInt2 *p = malloc (size*sizeof(GRInt2));
+	GRDouble2 *p = malloc (size*sizeof(GRInt2));
 	if (!p) {
 		printf ("Can't allocate p\n");
 	}
-	p[0] = (GRInt2){258, 850};
-	p[1] = (GRInt2){720, 50};
-	p[2] = (GRInt2){1182, 850};
-	p[3] = (GRInt2){258, 850};
-	GRInt2 *buf;
+	p[0] = (GRDouble2){258, 850};
+	p[1] = (GRDouble2){720, 50};
+	p[2] = (GRDouble2){1182, 850};
+	p[3] = (GRDouble2){258, 850};
+	GRDouble2 *buf;
 	for (int i = 0; i < step; i++) {
 		size = 4*size-3;
-		buf = malloc (size*sizeof(GRInt2));
+		buf = malloc (size*sizeof(GRDouble2));
 		if (!buf) {
 			printf ("Not enough memory!\n");
 			break;
 		}
 		for (int i = 0; i < size-1; i += 4) {
 			buf[i] = p[i/4];
-			buf[i+1] = (GRInt2){0.666*buf[i].x + 0.333*p[i/4+1].x,
-				0.666*buf[i].y + 0.333*p[i/4+1].y};
-			buf[i+2] = (GRInt2){(buf[i+1].x - buf[i].x)*0.5 + 
+			buf[i+1] = (GRDouble2){0.66666*buf[i].x + 0.33333*p[i/4+1].x,
+				0.66666*buf[i].y + 0.33333*p[i/4+1].y};
+			buf[i+2] = (GRDouble2){(buf[i+1].x - buf[i].x)*0.5 + 
 				sqrt(3)/2*(buf[i+1].y - buf[i].y) + buf[i+1].x,
 				-(buf[i+1].x - buf[i].x)*sqrt(3)/2 +
 				0.5*(buf[i+1].y - buf[i].y) + buf[i+1].y};
-			buf[i+3] = (GRInt2){0.333*buf[i].x + 0.666*p[i/4+1].x,
-				0.333*buf[i].y + 0.666*p[i/4+1].y};
+			buf[i+3] = (GRDouble2){0.33333*buf[i].x + 0.66666*p[i/4+1].x,
+				0.33333*buf[i].y + 0.66666*p[i/4+1].y};
 		}
 		buf[size-1] = p[(size-1)/4];
 		free(p);
@@ -81,11 +81,12 @@ int main () {
 	
 	
 	for (int i = 0; i < size - 1; i++) {
-		GRDrawLine (img, p[i], p[i+1], color, 2);
+		GRDrawLine (img, (GRInt2){(int) p[i].x, (int) p[i].y}, (GRInt2){(int) p[i+1].x, (int) p[i+1].y}, color, 2);
 	}
-	GRDrawLine (img, p[size-1], p[0], color, 2);
+	GRDrawLine (img, (GRInt2){(int) p[size-1].x, (int) p[size-1].y}, (GRInt2){(int) p[0].x, (int) p[0].y}, color, 2);
+	free(p);
 	GRWriteImg (img, fp);
+	GRDestroyImg (img);
 	fclose (fp);
 	return 0;
-
 }

@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  GR3d.h
+ *       Filename:  test.c
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  03/11/2022 10:15:12
+ *        Created:  03/11/2022 16:26:12
  *       Revision:  none
  *       Compiler:  clang
  *
@@ -15,34 +15,23 @@
  *
  * =====================================================================================
  */
-#ifndef GR3D_H
-#define GR3D_H
-
-#include "GRTypes"
+#include <stdlib.h>
+#include <stdio.h>
 
 typedef struct {
-	double x;
-	double y;
-	double z;
-} GRDouble3;
+	int x1;
+	int x2;
+} i2;
 
 typedef struct {
-	int n;
-	GRColor c;
-} GRSegment;
+	double x1;
+	double x2;
+} d2;
 
-typedef struct {
-	GRDouble3 *vertex;
-	GRSegment **adj;
-} GRFigure;
+int main () {
+	i2 p = {12, 13};
+	d2 d = (d2)p;
 
-typedef struct {
-	int n;
-	GRFigure *fig;
-	int l;
-	int hieght;
-	int width;
-} GRScene;
-
-
-#endif /* GR3D_H */
+	printf ("%g, %g\n", d);
+	return 0;
+}

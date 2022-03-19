@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  GRObj.h
+ *       Filename:  test.c
  *
- *    Description: support for .obj files 
+ *    Description:  
  *
  *        Version:  1.0
- *        Created:  03/13/2022 11:26:26
+ *        Created:  03/10/2022 18:55:18
  *       Revision:  none
  *       Compiler:  clang
  *
@@ -15,11 +15,12 @@
  *
  * =====================================================================================
  */
-#ifndef GROBJ_H
-#define GROBJ_H
+#include <stdlib.h>
+#include <complex.h>
+#include <stdio.h>
 
-#include "GR3DdTypes.h"
-
-
-
-#endif /* GROBJ_H */
+int main () {
+	double complex z = 1 + I*1;
+	printf ("%lf + i%lf", z*z);
+	return 0;
+}

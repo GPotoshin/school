@@ -1,0 +1,7 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/giorno/dev/school/3d'
+mkdir -p bin
+make: Leaving directory `/Users/giorno/dev/school/3d'
+ 
+make: *** No rule to make target `bin/grooph.so', needed by `bin/3d'.
+

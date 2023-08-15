@@ -1,0 +1,21 @@
+L1  - Hello world                     D +
+L2  - cubic equation                  D +
+L3  - c^n_k                           D +
+L4  - calculating pi                  D +
+L5  - calculating result of function  D +
+L6  - calculating integral            D +
+L7  - gcd                             D +
+L8  - random array                    D +
+L9  - n^2 sort                        D +
+L10 - R function (fibonachi)          D +
+L11 - nlog(n) sort		      D +
+L12 - operations with chars           D +
+L13 - palindromes                     D +
+L14 - %d                              D +
+L15 - sorting lines                   D +
+L16 - filling array                   D -
+L17 - size of types                   D +
+L18 - Bitwise operations              D -
+L19 - Queens                          D -
+L20 - Knights                         D -
+L21 - Encryption		      D -
